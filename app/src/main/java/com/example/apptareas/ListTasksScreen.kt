@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -88,13 +89,13 @@ fun ListTasksScreen(onRegresar: () -> Unit) {
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF3B5BDB),
-                    titleContentColor = Color.White,
-                    navigationIconContentColor = Color.White
+                    containerColor = SuperficieOscura,
+                    titleContentColor = TextoPrimario,
+                    navigationIconContentColor = TextoPrimario
                 )
             )
         },
-        containerColor = Color(0xFFF5F6FA)
+        containerColor = FondoOscuro
     ) { innerPadding ->
 
         if (tasks.isEmpty()) {
@@ -107,7 +108,7 @@ fun ListTasksScreen(onRegresar: () -> Unit) {
                 Text(
                     text = "Oops, te quedaste sin tareas",
                     fontSize = 18.sp,
-                    color = Color(0xFF6B6B6B),
+                    color = TextoSecundario,
                     fontWeight = FontWeight.Medium
                 )
             }
@@ -116,7 +117,7 @@ fun ListTasksScreen(onRegresar: () -> Unit) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding),
-                contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp),
+                contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 items(items = tasks, key = { it.id }) { t ->
@@ -140,8 +141,8 @@ fun TaskCard(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White)
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+        colors = CardDefaults.cardColors(containerColor = SuperficieOscura)
     ) {
         Row(
             modifier = Modifier
@@ -149,19 +150,22 @@ fun TaskCard(
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = task.title,
                     fontSize = 17.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF2B2B2B)
+                    color = TextoPrimario
                 )
+
                 Text(
                     text = task.description,
                     fontSize = 14.sp,
-                    color = Color(0xFF6B6B6B),
+                    color = TextoSecundario,
                     modifier = Modifier.padding(top = 4.dp, bottom = 8.dp)
                 )
+
                 StatusCheck(status = task.status)
             }
 
@@ -169,7 +173,7 @@ fun TaskCard(
                 Icon(
                     imageVector = Icons.Filled.Delete,
                     contentDescription = "Eliminar tarea",
-                    tint = Color(0xFFE03131)
+                    tint = Color(0xFFFF6B6B)
                 )
             }
         }
@@ -179,8 +183,8 @@ fun TaskCard(
 @Composable
 fun StatusCheck(status: String) {
     val esTerminado = status == "Terminado"
-    val fondo = if (esTerminado) Color(0xFFD3F9D8) else Color(0xFFFFF3BF)
-    val texto = if (esTerminado) Color(0xFF2B8A3E) else Color(0xFFE67700)
+    val fondo = if (esTerminado) Color(0xFF1B3A4B) else Color(0xFF2E2E2E)
+    val texto = if (esTerminado) Color(0xFF4DABF7) else TextoSecundario
     val icono = if (esTerminado) Icons.Filled.Check else Icons.Filled.Clear
 
     Box(

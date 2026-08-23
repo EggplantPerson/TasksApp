@@ -27,13 +27,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 
+//Paleta de colores
+val FondoOscuro = Color(0xFF121212)
+val SuperficieOscura = Color(0xFF1E1E1E)
+val AzulAcento = Color(0xFF4DABF7)
+val TextoPrimario = Color(0xFFECECEC)
+val TextoSecundario = Color(0xFFA0A0A0)
+val BordeOscuro = Color(0xFF3A3A3A)
+
 @Composable
 fun LoginScreen(onIrDetalle: () -> Unit) {
 
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
 
-    Scaffold { innerPadding ->
+    Scaffold(
+        containerColor = FondoOscuro
+    ) { innerPadding ->
 
         Column(
             modifier = Modifier
@@ -42,7 +52,6 @@ fun LoginScreen(onIrDetalle: () -> Unit) {
                 .padding(horizontal = 24.dp),
             verticalArrangement = Arrangement.Center
         ) {
-
             Spacer(modifier = Modifier.height(32.dp))
 
             OutlinedTextField(
@@ -53,8 +62,17 @@ fun LoginScreen(onIrDetalle: () -> Unit) {
                 singleLine = true,
                 shape = RoundedCornerShape(12.dp),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = Color(0xFF3B5BDB),
-                    unfocusedBorderColor = Color(0xFFB0B0B0)
+                    focusedBorderColor = AzulAcento,
+                    unfocusedBorderColor = BordeOscuro,
+                    focusedLabelColor = AzulAcento,
+                    unfocusedLabelColor = TextoSecundario,
+                    cursorColor = AzulAcento,
+                    focusedTextColor = TextoPrimario,
+                    unfocusedTextColor = TextoPrimario,
+                    unfocusedPlaceholderColor = TextoSecundario,
+                    focusedPlaceholderColor = TextoSecundario,
+                    focusedContainerColor = SuperficieOscura,
+                    unfocusedContainerColor = SuperficieOscura
                 ),
                 modifier = Modifier.fillMaxWidth()
             )
@@ -65,12 +83,21 @@ fun LoginScreen(onIrDetalle: () -> Unit) {
                 value = password,
                 onValueChange = { textoNuevo -> password = textoNuevo },
                 label = { Text("Contraseña") },
-                placeholder = { Text("contraseña123") },
+                placeholder = { Text("*********") },
                 singleLine = true,
                 shape = RoundedCornerShape(12.dp),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = Color(0xFF3B5BDB),
-                    unfocusedBorderColor = Color(0xFFB0B0B0)
+                    focusedBorderColor = AzulAcento,
+                    unfocusedBorderColor = BordeOscuro,
+                    focusedLabelColor = AzulAcento,
+                    unfocusedLabelColor = TextoSecundario,
+                    cursorColor = AzulAcento,
+                    focusedTextColor = TextoPrimario,
+                    unfocusedTextColor = TextoPrimario,
+                    unfocusedPlaceholderColor = TextoSecundario,
+                    focusedPlaceholderColor = TextoSecundario,
+                    focusedContainerColor = SuperficieOscura,
+                    unfocusedContainerColor = SuperficieOscura
                 ),
                 modifier = Modifier.fillMaxWidth(),
                 visualTransformation = PasswordVisualTransformation()
@@ -85,8 +112,8 @@ fun LoginScreen(onIrDetalle: () -> Unit) {
                     .fillMaxWidth()
                     .height(54.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF3B5BDB),
-                    contentColor = Color.White
+                    containerColor = AzulAcento,
+                    contentColor = Color(0xFF121212)
                 )
             ) {
                 Text("Iniciar sesión", fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
