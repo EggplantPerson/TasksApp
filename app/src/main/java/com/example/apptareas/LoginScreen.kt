@@ -52,6 +52,13 @@ fun LoginScreen(onIrDetalle: () -> Unit) {
                 .padding(horizontal = 24.dp),
             verticalArrangement = Arrangement.Center
         ) {
+            Text(
+                text = "Task App",
+                color = AzulAcento,
+                style = MaterialTheme.typography.displaySmall,
+                fontWeight = FontWeight.Bold
+            )
+
             Spacer(modifier = Modifier.height(32.dp))
 
             OutlinedTextField(
