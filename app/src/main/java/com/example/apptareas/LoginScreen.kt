@@ -56,7 +56,8 @@ fun LoginScreen(onIrDetalle: () -> Unit) {
                 text = "Task App",
                 color = AzulAcento,
                 style = MaterialTheme.typography.displaySmall,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center
             )
 
             Spacer(modifier = Modifier.height(32.dp))
