@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,6 +42,34 @@ fun LoginScreen(onIrDetalle: () -> Unit) {
 
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
+    var emailError by remember { mutableStateOf<String?>(null) }
+    var passwordError by remember { mutableStateOf<String?>(null) }
+
+    val EMAIL_ADRESS_PATTERN = java.util.regex.Pattern.compile(
+        "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                "\\@" +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                "(" +
+                "\\." +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                ")+"
+    )
+
+
+    fun validateEmail(text: String): String? {
+        return when {
+            text.isEmpty() -> "Introduzca un email"
+            EMAIL_ADRESS_PATTERN.matcher(text).matches() -> "Introduzca un email válido"
+            else -> null
+        }
+    }
+
+    fun validatePassword(text:String): String? {
+        return when {
+            text.isEmpty() -> "Introduzca una contraseña"
+            else -> null
+        }
+    }
 
     Scaffold(
         containerColor = FondoOscuro
@@ -68,7 +97,6 @@ fun LoginScreen(onIrDetalle: () -> Unit) {
                 value = email,
                 onValueChange = { textoNuevo -> email = textoNuevo },
                 label = { Text("Correo electrónico") },
-                placeholder = { Text("example@nomail.com") },
                 singleLine = true,
                 shape = RoundedCornerShape(12.dp),
                 colors = OutlinedTextFieldDefaults.colors(
@@ -84,6 +112,15 @@ fun LoginScreen(onIrDetalle: () -> Unit) {
                     focusedContainerColor = SuperficieOscura,
                     unfocusedContainerColor = SuperficieOscura
                 ),
+                isError = emailError != null,
+                supportingText = {
+                    if (emailError != null) {
+                        Text(
+                            text = emailError!!,
+                            color = MaterialTheme.colorScheme.error
+                        )
+                    }
+                },
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -116,7 +153,12 @@ fun LoginScreen(onIrDetalle: () -> Unit) {
             Spacer(modifier = Modifier.height(28.dp))
 
             Button(
-                onClick = onIrDetalle,
+                onClick = {
+                    emailError = validateEmail(email)
+                    if (emailError == null) {
+                        onIrDetalle
+                    }
+                },
                 shape = RoundedCornerShape(14.dp),
                 modifier = Modifier
                     .fillMaxWidth()
