@@ -1,5 +1,6 @@
 package com.example.apptareas
 
+import android.util.Patterns
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -67,6 +68,7 @@ fun LoginScreen(onIrDetalle: () -> Unit) {
     fun validatePassword(text:String): String? {
         return when {
             text.isEmpty() -> "Introduzca una contraseña"
+            text.length < 8 -> "Introduzca una contraseña de al menos 8 carácteres"
             else -> null
         }
     }
