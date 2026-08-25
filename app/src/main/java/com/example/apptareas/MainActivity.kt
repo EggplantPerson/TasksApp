@@ -25,30 +25,28 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Navegador () {
 
-    val navControl = rememberNavController()
+    val navController = rememberNavController()
 
     // Contenedor donde registramos las pantallas
     NavHost(
-        navController = navControl,
-        startDestination = Rutas.LOGIN
+        navController = navController,
+        startDestination = Routes.LOGIN
     ) {
 
         composable(
-            route = Rutas.LOGIN
+            route = Routes.LOGIN
         ) {
             LoginScreen(
-                onIrDetalle = {
-                    navControl.navigate(Rutas.TASKS)
-                }
+                navController = navController
             )
         }
 
         composable(
-            route = Rutas.TASKS
+            route = Routes.TASKS
         ) {
             ListTasksScreen(
                 onRegresar = {
-                    navControl.popBackStack()
+                    navController.popBackStack()
                 }
             )
         }
@@ -56,8 +54,7 @@ fun Navegador () {
     }
 
 }
-
-private object Rutas {
+object Routes {
     const val LOGIN = "login"
     const val TASKS = "tasks"
 }

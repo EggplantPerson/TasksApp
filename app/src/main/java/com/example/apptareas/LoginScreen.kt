@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.navigation.NavController
 
 //Paleta de colores
 val FondoOscuro = Color(0xFF121212)
@@ -39,7 +40,7 @@ val TextoSecundario = Color(0xFFA0A0A0)
 val BordeOscuro = Color(0xFF3A3A3A)
 
 @Composable
-fun LoginScreen(onIrDetalle: () -> Unit) {
+fun LoginScreen(navController : NavController) {
 
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
@@ -55,7 +56,6 @@ fun LoginScreen(onIrDetalle: () -> Unit) {
                 "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
                 ")+"
     )
-
 
     fun validateEmail(text: String): String? {
         return when {
@@ -168,7 +168,7 @@ fun LoginScreen(onIrDetalle: () -> Unit) {
                     emailError = validateEmail(email)
                     passwordError = validatePassword(password)
                     if (emailError == null && passwordError == null) {
-                        onIrDetalle
+                        navController.navigate(Routes.TASKS)
                     }
                 },
                 shape = RoundedCornerShape(14.dp),
