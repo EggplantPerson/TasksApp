@@ -146,6 +146,15 @@ fun LoginScreen(onIrDetalle: () -> Unit) {
                     focusedContainerColor = SuperficieOscura,
                     unfocusedContainerColor = SuperficieOscura
                 ),
+                isError = passwordError != null,
+                supportingText = {
+                    if (passwordError != null) {
+                        Text(
+                            text = passwordError!!,
+                            color = MaterialTheme.colorScheme.error
+                        )
+                    }
+                },
                 modifier = Modifier.fillMaxWidth(),
                 visualTransformation = PasswordVisualTransformation()
             )
@@ -155,7 +164,8 @@ fun LoginScreen(onIrDetalle: () -> Unit) {
             Button(
                 onClick = {
                     emailError = validateEmail(email)
-                    if (emailError == null) {
+                    passwordError = validatePassword(password)
+                    if (emailError == null && passwordError == null) {
                         onIrDetalle
                     }
                 },
